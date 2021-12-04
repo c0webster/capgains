@@ -1,3 +1,9 @@
+#' calculate the cost basis for a given transaction
+#'
+#' @param qty_bought numeric vector, all buys of an asset
+#' @param price_bought numeric vector, associated prices for the buys
+#' @param time
+
 FIFO_costbasis_calc <- function(qty_bought, price_bought,
                                 timestamp_bought, qty_selloff) {
   running_qty <- 0
@@ -121,11 +127,3 @@ calc_tax_per_asset <- function(asset_id, trans_table) {
   sell_taxes_result[, asset := asset_id]
   return(sell_taxes_result)
 }
-calc
-# RUN STUFF ON DATA ------------------------------------------------------------
-data_test
-all_ids <- data_test[,unique(asset)]
-
-all_sell_results <- map_dfr(all_ids, calc_tax_per_asset, trans_table = data_test)
-all_sell_results[, sum(cap_gains)] * .25
-all_sell_results[order(timestamp)]
